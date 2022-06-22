@@ -7,7 +7,7 @@ module.exports = {
     host: 'localhost'
   },
   head: {
-    title: 'TTS - Trouble Ticketing System',
+    title: 'jendelaKu',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -15,15 +15,18 @@ module.exports = {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', type: 'text/css', href: 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/css/bootstrap.min.css' }
+      {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css2?family=Raleway&display=swap'
+      }
     ]
   },
   axios: {
-    baseURL: 'http://sambat.test', // Used as fallback if no runtime config is provided
+    baseURL: 'http://sso.test', // Used as fallback if no runtime config is provided
     proxy: true,
   },
   proxy: {
-    '/api': { target: 'http://sambat.test/api', pathRewrite: { '^/api/': '/' } }
+    '/api': { target: 'http://sso.test/api', pathRewrite: { '^/api/': '/' } }
   },
   /*
   ** Customize the progress bar color
@@ -49,8 +52,13 @@ module.exports = {
   },
   modules: [
     '@nuxtjs/axios',
-    '@nuxtjs/auth-next'
+    '@nuxtjs/auth-next',
+    'bootstrap-vue/nuxt',
+    '@nuxtjs/toast',
   ],
+  bootstrapVue: {
+    icons: true
+  },
   auth: {
     strategies: {
       local: {
@@ -65,15 +73,36 @@ module.exports = {
           // autoFetch: true
         },
         endpoints: {
-          login: { url: '/api/login', method: 'post' },
-          logout: { url: '/api/auth/logout', method: 'post' },
-          user: { url: '/api/user/detil', method: 'get' }
+          login: { 
+            url: '/api/login', 
+            method: 'post' 
+          },
+          logout: { 
+            url: '/api/logout', 
+            method: 'get' 
+          },
+          user: { 
+            url: '/api/get_user', 
+            method: 'get',
+            propertyName: false
+          }
         }
       }
-    }
+    },
+    redirect: {
+      logout: '/'
+    },
+    watchLoggedIn: true,
+    rewriteRedirects: true
   },
   plugins: [
-    { src: '~/plugins/notifications-client', ssr: false }
-  ]
+    { src: '~/plugins/notifications-client', ssr: false },
+    { src: '~/plugins/aos.js', ssr: false },
+    { src: '~/plugins/carousel-slider.js', ssr: false, components: true },
+  ],
+  toast: {
+    position: 'top-right',
+    duration: 2000
+  }
 }
 
