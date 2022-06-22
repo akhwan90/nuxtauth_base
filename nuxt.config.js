@@ -2,6 +2,12 @@ module.exports = {
   /*
   ** Headers of the page
   */
+  env: {
+    baseUrl:
+      process.env.NODE_ENV === 'dev'
+        ? 'http://localhost:3005'
+        : 'https://sso.kulonprogokab.go.id/sso_new/'
+  },
   server: {
     port: '3005',
     host: 'localhost'
