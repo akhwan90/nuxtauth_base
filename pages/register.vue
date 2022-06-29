@@ -89,7 +89,7 @@ export default {
         },
         async registerSocial(provider) {
             this.$toast.success('Contacting provider ...');
-            this.popupSocialLogin(`http://localhost/sso/public/api/login/${provider}/redirect`, '_blank', 'SocialLogin');
+            this.popupSocialLogin(`http://localhost/sso/public/api/login/${provider}/redirect`, '_blank');
         },
         popupSocialLogin(url, newWindow) {
             let w = 300;

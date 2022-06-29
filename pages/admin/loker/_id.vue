@@ -31,10 +31,13 @@ import { mapMutations } from 'vuex'
 import axios from 'axios'
 
 export default {
-    middleware: 'auth',
+    // middleware: 'auth',
     head() {
         return {
-            title: this.title
+            title: this.title,
+            bodyAttrs: {
+                style: 'background-image: url(https://www.toptal.com/designers/subtlepatterns/uploads/full-bloom.png);'
+            }
         }
     },
     data() {

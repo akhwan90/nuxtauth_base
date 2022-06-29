@@ -17,7 +17,8 @@ export default {
         this.$auth.setStrategy('local');
 
         this.$auth.fetchUser().then(() => {
-            this.$router.push('/');
+            // this.$router.go('/');
+            window.location.href = '/';
         }).catch((e) => {
             this.$auth.logout();
             // return this.$router.push(`/auth/${this.$route.query.origin ? this.$route.query.origin : 'register'}?error=1`);

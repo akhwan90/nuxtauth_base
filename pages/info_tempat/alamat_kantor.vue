@@ -1,7 +1,7 @@
     <template>
     <div class="container p-3">
         <h5 class="card-header border-0 p-3">
-            <b-icon-pin></b-icon-pin>
+            <b-icon-bank></b-icon-bank>
             {{ title }}
             <div class="float-right">
                 <a href="/" type="button" class="">
@@ -38,26 +38,13 @@
         },
         data() {
             return {
-                title: 'Perijinan',
+                title: 'Pemerintahan',
                 links: [
                     {
                         id: 1,
-                        label: 'Sicantik',
-                        url: 'https://sicantikui.layanan.go.id/#/login',
-                        target: '_blank'
-                    },
-                    {
-                        id: 2,
-                        label: 'SIMBG',
-                        url: 'https://simbg.pu.go.id/',
-                        target: '_blank'
-                    },
-                    {
-                        id: 3,
-                        label: 'OSS',
-                        url: 'https://oss.go.id/',
-                        target: '_blank'
-                    },
+                        label: 'Alamat Kantor',
+                        url: '/pemerintahan/alamat_kantor',
+                    }
                 ]
             }
         },

@@ -4,7 +4,7 @@
             <b-icon-collection-play></b-icon-collection-play>
             {{ title }}
             <div class="float-right">
-                <a href="/admin/dashboard" type="button" class="">
+                <a href="/" type="button" class="">
                     <b-icon-arrow-left-circle></b-icon-arrow-left-circle>
                 </a>
             </div>
@@ -31,7 +31,7 @@
 
 <script>
 export default {
-    middleware: 'auth',
+    // middleware: 'auth',
     head() {
         return {
             title: this.title

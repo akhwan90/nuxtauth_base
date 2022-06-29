@@ -1,28 +1,31 @@
 <template>
-		<div class="container p-3">
-            <h5 class="card-header d-flex justify-content-between align-items-center border-0 p-3">
-                {{ title }}
+    <div class="container p-3">
+        <h5 class="card-header border-0 p-3">
+            <b-icon-rss></b-icon-rss>
+            {{ title }}
+            <div class="float-right">
                 <a href="/admin/berita" type="button" class="">
-                    <b-icon icon="arrow-left-circle" variant="danger" class="float-right mr-5"></b-icon>
+                    <b-icon-arrow-left-circle></b-icon-arrow-left-circle>
                 </a>
-            </h5>
+            </div>
+        </h5>
 
-            <div class="mt-3">
-                <div class="row">
-                    <div class="col-lg-6 col-sm-12" v-for="berita in beritas" :key="berita.id">
-                        <div class="card mt-2">
-                            <img :src="berita.gambar" class="card-img-top">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ berita.judul }}</h5>
-                                <p class="card-text" v-html="berita.konten.substring(0, 200)+' ...'"></p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
-                            </div>
+        <div class="mt-3">
+            <div class="row">
+                <div class="col-lg-6 col-sm-12" v-for="berita in beritas" :key="berita.id">
+                    <div class="card mt-2">
+                        <img :src="berita.gambar" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ berita.judul }}</h5>
+                            <p class="card-text" v-html="berita.konten.substring(0, 200)+' ...'"></p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
                         </div>
                     </div>
                 </div>
             </div>
-            
-		</div>
+        </div>
+
+    </div>
 </template>
 
 
@@ -34,7 +37,10 @@
     	// middleware: 'auth',
     	head() {
             return {
-          		title: this.title
+                title: this.title,
+                bodyAttrs: {
+                    style: 'background-image: url(https://www.toptal.com/designers/subtlepatterns/uploads/full-bloom.png);'
+                }
             }
     	},
 		data() {
