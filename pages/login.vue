@@ -18,7 +18,7 @@
                         <small><a href="/forgot_password" class="text-danger float-right">Lupa password..?</a></small>
                     </div>
 
-                    <button class="w-100 btn btn-lg btn-primary mt-4" type="submit">
+                    <button class="w-100 btn btn-lg btn-success mt-4" type="submit">
                         <b-icon-check-circle></b-icon-check-circle> Login
                     </button>
                     <button class="w-100 btn btn-lg btn-primary mt-2" type="button" @click="registerSocial('facebook')">
@@ -27,6 +27,9 @@
                     <button class="w-100 btn btn-lg btn-danger mt-2" type="button" @click="registerSocial('google')">
                         <b-icon-google></b-icon-google> Login dengan Google
                     </button>
+                    <a class="w-100 btn btn-lg btn-primary mt-2" href="/">
+                        <b-icon-chevron-left></b-icon-chevron-left> Kembali Ke Beranda
+                    </a>
 
                     <!-- <hr class="my-4">
                     <small class="text-muted">Masukkan username dan password yang benar</small> -->
@@ -40,8 +43,17 @@
 import { mapMutations } from 'vuex'
 
 export default {
+    head() {
+        return {
+            title: this.title,
+            bodyAttrs: {
+                style: 'background-image: url(https://www.toptal.com/designers/subtlepatterns/uploads/full-bloom.png);'
+            }
+        }
+    },
     data() {
         return {
+            title: 'Login JendelaKu',
             login: {
                 username: '',
                 password: ''

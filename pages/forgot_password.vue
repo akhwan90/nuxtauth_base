@@ -25,8 +25,17 @@
 import { mapMutations } from 'vuex'
 
 export default {
+    head() {
+        return {
+            title: this.title,
+            bodyAttrs: {
+                style: 'background-image: url(https://www.toptal.com/designers/subtlepatterns/uploads/full-bloom.png);'
+            }
+        }
+    },
     data() {
         return {
+            title: 'Lupa password JendelaKu',
             forgot: {
                 email: '',
             }

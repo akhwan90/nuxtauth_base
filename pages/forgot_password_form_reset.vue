@@ -26,8 +26,17 @@
 
 <script>
 export default {
+    head() {
+        return {
+            title: this.title,
+            bodyAttrs: {
+                style: 'background-image: url(https://www.toptal.com/designers/subtlepatterns/uploads/full-bloom.png);'
+            }
+        }
+    },
     data() {
         return {
+            title: 'Masukkan password baru JendelaKu',
             resetOK: {
                 password1: '',
                 password2: '',

@@ -2,12 +2,6 @@ module.exports = {
   /*
   ** Headers of the page
   */
-  env: {
-    baseUrl:
-      process.env.NODE_ENV === 'dev'
-        ? 'http://localhost:3005'
-        : 'https://sso.kulonprogokab.go.id/sso_new/'
-  },
   server: {
     port: '3005',
     host: 'localhost'
@@ -28,11 +22,11 @@ module.exports = {
     ]
   },
   axios: {
-    baseURL: 'http://sso.test', // Used as fallback if no runtime config is provided
+    baseURL: process.env.BASE_URL_API, // Used as fallback if no runtime config is provided
     proxy: true,
   },
   proxy: {
-    '/api': { target: 'http://sso.test/api', pathRewrite: { '^/api/': '/' } }
+    '/api': { target: process.env.BASE_URL_API + '/api', pathRewrite: { '^/api/': '/' } }
   },
   /*
   ** Customize the progress bar color
@@ -109,6 +103,9 @@ module.exports = {
   toast: {
     position: 'top-right',
     duration: 2000
+  },
+  router: {
+    base: process.env.BASE_URL_APP
   }
 }
 

@@ -3,7 +3,8 @@
         <div class="row align-items-center g-lg-5 py-5">
             <div class="col-lg-7 text-center text-lg-start">
                 <h1 class="display-4 fw-bold lh-1">Daftar JendelaKu</h1>
-                <p class="col-lg-10 fs-4">Untuk menggunakan semua layanan di aplikasi JendelaKU, Anda harus melakukan login.</p>
+                <p class="col-lg-10 fs-4">Untuk menggunakan semua layanan di aplikasi JendelaKU, Anda harus melakukan
+                    login.</p>
             </div>
             <div class="col-md-10 mx-auto col-lg-5">
                 <div class="alert alert-danger" v-if="notifmsg">
@@ -13,7 +14,7 @@
                         </div>
                     </div>
                 </div>
-                <form @submit.prevent="actRegister">            
+                <form @submit.prevent="actRegister">
                     <div class="form-floating">
                         <label for="floatingInput1">Email</label>
                         <input type="text" class="form-control" id="floatingInput1" v-model="register.email">
@@ -34,13 +35,23 @@
                         <label for="floatingPassword2">Ulangi Password</label>
                         <input type="password" class="form-control" id="floatingPassword2" v-model="register.password2">
                     </div>
-                    
-                    <button class="w-100 btn btn-lg btn-danger mt-2" type="submit"><b-icon-pencil-fill></b-icon-pencil-fill> Daftar</button>
+
+                    <button class="w-100 btn btn-lg btn-success mt-2" type="submit">
+                        <b-icon-pencil-fill></b-icon-pencil-fill> Daftar
+                    </button>
                     <!-- <hr class="my-4">
                     <small class="text-muted">Masukkan username dan password yang benar</small> -->
                 </form>
 
-                <button class="w-100 btn btn-lg btn-primary mt-2" type="button" @click="registerSocial('facebook')"><b-icon-facebook></b-icon-facebook> Daftar dengan Facebook</button>
+                <button class="w-100 btn btn-lg btn-primary mt-2" type="button" @click="registerSocial('facebook')">
+                    <b-icon-facebook></b-icon-facebook> Daftar dengan Facebook
+                </button>
+                <button class="w-100 btn btn-lg btn-danger mt-2" type="button" @click="registerSocial('google')">
+                    <b-icon-google></b-icon-google> Daftar dengan Google
+                </button>
+                <a class="w-100 btn btn-lg btn-primary mt-2" href="/">
+                    <b-icon-chevron-left></b-icon-chevron-left> Kembali Ke Beranda
+                </a>
             </div>
         </div>
     </div>
@@ -50,8 +61,17 @@
 import axios from 'axios'
 
 export default {
+    head() {
+        return {
+            title: this.title,
+            bodyAttrs: {
+                style: 'background-image: url(https://www.toptal.com/designers/subtlepatterns/uploads/full-bloom.png);'
+            }
+        }
+    },
     data() {
         return {
+            title: 'Daftar JendelaKu',
             register: {
                 email: '',
                 nama: '',
