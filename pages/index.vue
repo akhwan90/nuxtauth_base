@@ -140,18 +140,39 @@ export default {
             }
         },
         openMenu(submenu) {
-            let sudahLogin = this.$auth.loggedIn ? 1 : 0;
-            if (sudahLogin == parseInt(submenu.is_login)) {
-                this.$toast.info('menu tidak harus login');  
-                if (submenu.target == "new_window") {
-                    console.log(submenu.href)
-                    window.open(submenu.href);
+            // console.log('Menu Login: '+submenu.is_login+', NIK: '+submenu.is_nik+', NIP: '+submenu.is_nip+' type NIK: '+typeof(submenu.is_nik)+', type NIP: '+typeof(submenu.is_nip));
+            // console.log('User Login: ' + this.$auth.loggedIn + ', NIK: ' + this.$auth.user.is_nik + ', NIP: ' + this.$auth.user.is_nip + ', type of auth: '+typeof(this.$auth.loggedIn)+' type NIK: ' + typeof (this.$auth.user.is_nik) + ', type NIP: ' + typeof (this.$auth.user.is_nip));
+            
+            if (submenu.is_nip) {
+                if (this.$auth.user.is_nip) {
+                    this.$toast.success('yes')
                 } else {
-                    this.$router.push(submenu.href)
+                    this.$toast.error('no')
                 }
-            } else {
-                this.$toast.error('menu harus login');
+                return;
             }
+
+            if (submenu.is_nik) {
+                if (this.$auth.user.is_nik) {
+                    this.$toast.success('yes')
+                } else {
+                    this.$toast.error('no')
+                }
+                return;
+            }
+
+            if (submenu.is_login) {
+                if (this.$auth.loggedIn) {
+                    this.$toast.success('yes')
+                } else {
+                    this.$toast.error('no')
+                }
+                return;
+            }
+
+
+            this.$toast.success('yes')
+
             
         }
     },
@@ -166,12 +187,22 @@ export default {
             ],
             menus: null,
             searchMenu: false,
-            katakunci: ''
+            katakunci: '',
+            token: ''
         }
     },
     mounted() {
         this.getMenu();
         this.searchMenu = false;
+        
+        let token = this.$auth.strategy.token.get();
+        if (token) {
+            let pc_token = token.split(" ");
+            if (pc_token) {
+                this.token = pc_token[1];
+                // console.log(pc_token[1])
+            }
+        }
     }
 }
 </script>
