@@ -82,7 +82,7 @@ module.exports = {
             method: 'get' 
           },
           user: { 
-            url: '/api/get_user', 
+            url: '/api/admin/get_user', 
             method: 'get',
             propertyName: false
           }

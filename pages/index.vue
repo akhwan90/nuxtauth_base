@@ -140,12 +140,17 @@ export default {
             }
         },
         openMenu(submenu) {
-            // console.log('Menu Login: '+submenu.is_login+', NIK: '+submenu.is_nik+', NIP: '+submenu.is_nip+' type NIK: '+typeof(submenu.is_nik)+', type NIP: '+typeof(submenu.is_nip));
-            // console.log('User Login: ' + this.$auth.loggedIn + ', NIK: ' + this.$auth.user.is_nik + ', NIP: ' + this.$auth.user.is_nip + ', type of auth: '+typeof(this.$auth.loggedIn)+' type NIK: ' + typeof (this.$auth.user.is_nik) + ', type NIP: ' + typeof (this.$auth.user.is_nip));
+            let is_nik = 0;
+            let is_nip = 0;
+
+            if (this.$auth.loggedIn) {
+                is_nik = this.$auth.user.is_nik;
+                is_nip = this.$auth.user.is_nip;
+            }
             
             if (submenu.is_nip) {
-                if (this.$auth.user.is_nip) {
-                    this.$toast.success('yes')
+                if (is_nip == 1) {
+                    this.openHref(submenu);
                 } else {
                     this.$toast.error('no')
                 }
@@ -153,8 +158,8 @@ export default {
             }
 
             if (submenu.is_nik) {
-                if (this.$auth.user.is_nik) {
-                    this.$toast.success('yes')
+                if (is_nik == 1) {
+                    this.openHref(submenu);
                 } else {
                     this.$toast.error('no')
                 }
@@ -163,17 +168,23 @@ export default {
 
             if (submenu.is_login) {
                 if (this.$auth.loggedIn) {
-                    this.$toast.success('yes')
+                    this.openHref(submenu);
                 } else {
                     this.$toast.error('no')
                 }
                 return;
             }
 
+            this.openHref(submenu);
+        },
+        openHref(submenu) {
+            let tujuan = submenu.href.replace("{token}", this.token);
 
-            this.$toast.success('yes')
-
-            
+            if (submenu.target == "new_window") {
+                window.open(tujuan, '_blank');
+            } else {
+                window.location.href = tujuan;
+            }
         }
     },
     data() {
