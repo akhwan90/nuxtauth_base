@@ -70,7 +70,7 @@ export default {
                 data: formData 
             }).then(() => {
                 this.$store.commit('SET_IS_AUTH', true)
-                this.$router.go('/')
+                window.location.href = '/';
             })
             .catch((error) => {
                 alert("Terjadi kesalahan..")
