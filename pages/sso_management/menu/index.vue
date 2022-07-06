@@ -17,7 +17,7 @@
             <div class="col-lg-9">
                 <div class="card mt-3">
                     <div class="card-header">
-                        List Users
+                        {{ title }}
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -42,14 +42,24 @@
 
                         </div>
 
+                        <a href="/sso_management/menu/edit/0" class="btn btn-outline-primary mb-2">
+                            <b-icon-plus-circle></b-icon-plus-circle> Tambah
+                        </a>
+
                         <div class="table-responsive">
                             <table class="table table-bordered table-sm">
                                 <thead>
                                     <tr>
-                                        <th width="10%">No</th>
-                                        <th width="20%">Username</th>
-                                        <th width="25%">Email</th>
-                                        <th width="30%">Create At</th>
+                                        <th width="5%">No</th>
+                                        <th width="5%">ID 1</th>
+                                        <th width="5%">ID 2</th>
+                                        <th width="10%">Nama Menu</th>
+                                        <th width="10%">Icon</th>
+                                        <th width="10%">Color</th>
+                                        <th width="10%">Href</th>
+                                        <th width="10%">Is Login</th>
+                                        <th width="10%">Is NIP</th>
+                                        <th width="10%">Is NIK</th>
                                         <th width="5%">Status</th>
                                         <th width="10%">Aksi</th>
                                     </tr>
@@ -57,15 +67,24 @@
                                 <tbody>
                                     <tr v-for="(item, index) in pagination_data.data" :key="index">
                                         <td>{{ ((pagination_data.from) + index) }}</td>
-                                        <td>{{ item.username }}</td>
-                                        <td>{{ item.email }}</td>
-                                        <td>{{ item.create_at }}</td>
-                                        <td>
-                                            <b-icon-check class="text-success" v-if="item.aktif == 1"></b-icon-check>
-                                            <b-icon-minus class="text-danger" v-else></b-icon-minus>
+                                        <td>{{ item.id1 }}</td>
+                                        <td>{{ item.id2 }}</td>
+                                        <td>{{ item.label }}</td>
+                                        <td class="text-center">
+                                            <b-icon :icon="item.icon"></b-icon>
+                                        </td>
+                                        <td :class="'text-'+item.color">{{ item.color }}</td>
+                                        <td>{{ item.href }}</td>
+                                        <td>{{ item.is_login }}</td>
+                                        <td>{{ item.is_nip }}</td>
+                                        <td>{{ item.is_nik }}</td>
+                                        <td class="text-center">
+                                            <b-icon-check class="text-danger" title="Dihapus"
+                                                v-if="item.is_delete == 1"></b-icon-check>
+                                            <b-icon-minus class="text-success" v-else></b-icon-minus>
                                         </td>
                                         <td>
-                                            <a :href="'/sso_management/users/edit'+item.id"
+                                            <a :href="'/sso_management/menu/edit/'+item.id"
                                                 class="btn btn-outline-primary btn-sm">
                                                 <b-icon-pencil></b-icon-pencil> Edit
                                             </a>
@@ -111,7 +130,7 @@ export default {
     methods: {
         async getData() {
             try {
-                axios.get('/api/admin/user/list', {
+                axios.get('/api/admin/menu/list', {
                     headers: {
                         Authorization: this.$auth.strategy.token.get(),
                     }
@@ -129,9 +148,9 @@ export default {
             // this.pagination_data.current_page = (pagination_data + 1);
 
             // console.log(page)
-            let uri = '/api/admin/user/list?page='+page;
+            let uri = '/api/admin/menu/list?page='+page;
             if (this.kata_kunci != "") {
-                uri = '/api/admin/user/list?page='+page+'&kata_kunci='+this.kata_kunci;
+                uri = '/api/admin/menu/list?page='+page+'&kata_kunci='+this.kata_kunci;
             }
 
             try {
@@ -151,7 +170,7 @@ export default {
         }
     },
     mounted() {
-        this.title = 'SSO Management';
+        this.title = 'Menu Management';
         this.getData();
     }
 }

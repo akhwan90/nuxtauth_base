@@ -9,7 +9,7 @@
                 </template>
 
                 <b-dropdown-item href="/admin/user/profile">Profile</b-dropdown-item>
-                <b-dropdown-item href="/admin/user/password">Ubah Password</b-dropdown-item>
+                <b-dropdown-item href="/admin/user/change_password">Ubah Password</b-dropdown-item>
                 <b-dropdown-item href="/sso_management/dashboard" v-if="this.$auth.user.level == 1">SSO Management</b-dropdown-item>
                 <b-dropdown-item @click="logout">Logout</b-dropdown-item>
             </b-nav-item-dropdown>
