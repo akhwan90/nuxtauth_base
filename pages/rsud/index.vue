@@ -1,10 +1,10 @@
     <template>
     <div class="container p-3">
         <h5 class="card-header border-0 p-3">
-            <b-icon-pin></b-icon-pin>
+            <b-icon-patch-plus></b-icon-patch-plus>
             {{ title }}
             <div class="float-right">
-                <a href="/" type="button" class="">
+                <a :href="this.$config.baseURL" type="button" class="">
                     <b-icon-arrow-left-circle></b-icon-arrow-left-circle>
                 </a>
             </div>
@@ -25,37 +25,34 @@
 
     <script>
     export default {
-        // middleware: 'auth',
+		layout: 'user_layout',
         head() {
             return {
-                title: this.title,
-                bodyAttrs: {
-                    style: 'background-image: url(https://www.toptal.com/designers/subtlepatterns/uploads/full-bloom.png);'
-                }
+                title: this.title
             }
         },
         methods: {
         },
         data() {
             return {
-                title: 'Perijinan',
+                title: 'RSUD',
                 links: [
                     {
                         id: 1,
-                        label: 'Sicantik',
-                        url: 'https://sicantikui.layanan.go.id/#/login',
+                        label: 'Jadwal Poli RSUD Wates',
+                        url: 'https://rsud.kulonprogokab.go.id/poliklinik/poli/daftarPoliPWA',
                         target: '_blank'
                     },
                     {
                         id: 2,
-                        label: 'SIMBG',
-                        url: 'https://simbg.pu.go.id/',
+                        label: 'Jadwal Poli RSUD Nyi Ageng Serang (Sentolo)',
+                        url: 'https://rsnas.kulonprogokab.go.id/poliklinik/poli/daftarPoliPWA',
                         target: '_blank'
                     },
                     {
                         id: 3,
-                        label: 'OSS',
-                        url: 'https://oss.go.id/',
+                        label: 'Daftar Online RSUD Nyi Ageng Serang (Sentolo)',
+                        url: 'https://rsudnas.com/',
                         target: '_blank'
                     },
                 ]

@@ -4,7 +4,7 @@
             <b-icon-key-fill></b-icon-key-fill>
             {{ title }}
             <div class="float-right">
-                <a href="/" type="button" class="">
+                <a :href="$config.baseURL" type="button" class="">
                     <b-icon-arrow-left-circle></b-icon-arrow-left-circle>
                 </a>
             </div>
@@ -65,7 +65,7 @@
                                             <b-icon-minus class="text-danger" v-else></b-icon-minus>
                                         </td>
                                         <td>
-                                            <a :href="'/sso_management/users/edit'+item.id"
+                                            <a :href="$config.baseURL + '/sso_management/users/edit/'+item.id"
                                                 class="btn btn-outline-primary btn-sm">
                                                 <b-icon-pencil></b-icon-pencil> Edit
                                             </a>
@@ -86,19 +86,16 @@
 
 <script>
 import SidebarMenuSSOManagement from "@/components/SidebarMenuSSOManagement";
-import axios from 'axios'
 
 export default {
     middleware: 'auth',
     components: {
         SidebarMenuSSOManagement
     },
+    layout: 'user_layout',
     head() {
         return {
-            title: this.title,
-            bodyAttrs: {
-                style: 'background-image: url(https://www.toptal.com/designers/subtlepatterns/uploads/full-bloom.png);'
-            }
+            title: this.title
         }
     },
     data() {
@@ -111,7 +108,7 @@ export default {
     methods: {
         async getData() {
             try {
-                axios.get('/api/admin/user/list', {
+                this.$axios.get('/api/admin/user/list', {
                     headers: {
                         Authorization: this.$auth.strategy.token.get(),
                     }
@@ -135,7 +132,7 @@ export default {
             }
 
             try {
-                axios.get(uri, {
+                this.$axios.get(uri, {
                     headers: {
                         Authorization: this.$auth.strategy.token.get(),
                     }

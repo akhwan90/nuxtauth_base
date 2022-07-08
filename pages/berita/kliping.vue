@@ -4,7 +4,7 @@
             <b-icon-rss></b-icon-rss>
             {{ title }}
             <div class="float-right">
-                <a href="/admin/berita" type="button" class="">
+                <a :href="this.$config.baseURL + '/berita'" type="button" class="">
                     <b-icon-arrow-left-circle></b-icon-arrow-left-circle>
                 </a>
             </div>
@@ -28,22 +28,16 @@
 
 
 <script>
-  	import { mapMutations } from 'vuex'
-    import axios from 'axios'
-
   	export default {
-    	// middleware: 'auth',
+		layout: 'user_layout',
     	head() {
             return {
                 title: this.title,
-                bodyAttrs: {
-                    style: 'background-image: url(https://www.toptal.com/designers/subtlepatterns/uploads/full-bloom.png);'
-                }
             }
     	},
 		data() {
 			return {
-				title: '',
+                title: 'Kliping Media Cetak',
 				tokenRaw: '',
                 beritas: [],
 			}
@@ -51,32 +45,19 @@
 		methods: {
             async getBerita() {
                 try {
-                    axios.get('/api/berita/kliping',
-                        {
-                            headers: {
-                                'Authorization': this.$auth.strategy.token.get()
-                            }
-                        }
-                    ).then(({ data }) => {
-                        console.log(data.data)
+                    this.$axios.get('/api/berita/kliping')
+                    .then(({ data }) => {
                         this.beritas.push(...data.data)
                     }).catch((error) => {
-                        // if (error.response) {
-                        //     this.$notify({
-                        //         title: 'Kesalahan',
-                        //         type: 'error',
-                        //         text: error.response.message
-                        //     })
-                        // }
+                        this.$toast.error('Terjadi kesalahan')
                     });
 
                 } catch (err) {
-                    console.log(err)
+                    this.$toast.error('Terjadi kesalahan')
                 }
             }
 		},
 		mounted() {
-			this.title = 'Kliping Media Cetak';
             this.getBerita();
 		}
   	}

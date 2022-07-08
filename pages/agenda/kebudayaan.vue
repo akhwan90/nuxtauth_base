@@ -4,7 +4,7 @@
             <b-icon-calendar-check></b-icon-calendar-check>
             {{ title }}
             <div class="float-right">
-                <a href="/admin/agenda" type="button" class="">
+                <a :href="this.$config.baseURL + '/agenda'" type="button" class="">
                     <b-icon-arrow-left-circle></b-icon-arrow-left-circle>
                 </a>
             </div>
@@ -23,23 +23,18 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
-    
+
 </template>
 
 
 <script>
-import axios from 'axios'
-
 export default {
-    // middleware: 'auth',
+    layout: 'user_layout',
     head() {
         return {
             title: this.title,
-            bodyAttrs: {
-                style: 'background-image: url(https://www.toptal.com/designers/subtlepatterns/uploads/full-bloom.png);'
-            }
         }
     },
     data() {
@@ -52,33 +47,20 @@ export default {
     methods: {
         async getAgenda() {
                 try {
-                    axios.get('/api/agenda/kebudayaan',
-                        {
-                            headers: {
-                                'Authorization': this.$auth.strategy.token.get()
-                            }
-                        }
-                    ).then(({ data }) => {
-                        console.log(data)
+                    this.$axios.get('/api/agenda/kebudayaan')
+                    .then(({ data }) => {
                         this.agendas.push(...data.data)
                     }).catch((error) => {
-                        // if (error.response) {
-                        //     this.$notify({
-                        //         title: 'Kesalahan',
-                        //         type: 'error',
-                        //         text: error.response.message
-                        //     })
-                        // }
+                        this.$toast.error('Terjadi kesalahan')
                     });
 
                 } catch (err) {
-                    console.log(err)
+                    this.$toast.error('Terjadi kesalahan')
                 }
             }
     },
     mounted() {
         this.getAgenda()
-        // console.log(this.$store.state)
     }
 }
 </script>

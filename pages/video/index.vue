@@ -1,10 +1,10 @@
 <template>
     <div class="container p-3">
         <h5 class="card-header border-0 p-3">
-            <b-icon-calendar-check></b-icon-calendar-check>
+            <b-icon-collection-play></b-icon-collection-play>
             {{ title }}
             <div class="float-right">
-                <a href="/" type="button" class="">
+                <a :href="this.$config.baseURL" type="button" class="">
                     <b-icon-arrow-left-circle></b-icon-arrow-left-circle>
                 </a>
             </div>
@@ -12,10 +12,18 @@
 
         <div class="card mt-3">
             <div class="list-group list-group-flush">
-                <a href="/admin/agenda/pariwisata" class="list-group-item list-group-item-action"><b-icon-arrow-right-circle></b-icon-arrow-right-circle> Agenda Pariwisata</a>
-                <a href="/admin/agenda/kebudayaan" class="list-group-item list-group-item-action"><b-icon-arrow-right-circle></b-icon-arrow-right-circle> Agenda Kebudayaan</a>
+                <a href="https://www.youtube.com/channel/UC9_-BtLTD8oQ7druxMYWU2A" target="_blank" class="list-group-item list-group-item-action"><b-icon-youtube></b-icon-youtube> Youtube Kulonprogo TV</a>
+                <a href="#" v-b-modal.modal-1 class="list-group-item list-group-item-action"><b-icon-youtube></b-icon-youtube> Youtube OPD</a>
             </div>
         </div>
+
+        <b-modal id="modal-1" size="lg" title="Kanal Youtube OPD" ok-only>
+            <div class="card">
+                <div class="list-group list-group-flush">
+                    <a :href="youtubeOPD.url" target="_blank" class="list-group-item list-group-item-action" v-for="youtubeOPD in youtubeOPDs" :key="youtubeOPD.id"><b-icon-youtube></b-icon-youtube> {{ youtubeOPD.label }}</a>
+                </div>
+            </div>
+        </b-modal>
     </div>
     
 </template>
@@ -23,20 +31,17 @@
 
 <script>
 export default {
-    // middleware: 'auth',
+    layout: 'user_layout',
     head() {
         return {
-            title: this.title,
-            bodyAttrs: {
-                style: 'background-image: url(https://www.toptal.com/designers/subtlepatterns/uploads/full-bloom.png);'
-            }
+            title: this.title
         }
     },
     methods: {
     },
     data() {
         return {
-            title: 'Agenda',
+            title: 'Video',
             youtubeOPDs: [
                 {
                     id: 1,

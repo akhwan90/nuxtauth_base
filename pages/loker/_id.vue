@@ -4,7 +4,7 @@
             <b-icon-briefcase></b-icon-briefcase>
             {{ title }}
             <div class="float-right">
-                <a href="/" type="button" class="">
+                <a :href="this.$config.baseURL + '/loker'" type="button" class="">
                     <b-icon-arrow-left-circle></b-icon-arrow-left-circle>
                 </a>
             </div>
@@ -12,12 +12,10 @@
 
         <div class="mt-3">
             <div class="row">
-                <div class="col-lg-6 col-sm-12" v-for="loker in lokers" :key="loker.id">
+                <div class="col-lg-12 col-sm-12">
                     <div class="card mt-2">
                         <div class="card-body">
-                            <h5 class="card-title">{{ loker.judul }}</h5>
-                            <p class="card-text">{{ loker.name }}, Pendidikan minimal {{ loker.min_education }}</p>
-                            <a :href="'/admin/loker/'+loker.id" class="btn btn-primary">Detil</a>
+
                         </div>
                     </div>
                 </div>
@@ -29,38 +27,27 @@
 
 
 <script>
-import { mapMutations } from 'vuex'
-import axios from 'axios'
-
 export default {
-    // middleware: 'auth',
+    layout: 'user_layout',
     head() {
         return {
-            title: this.title,
-            bodyAttrs: {
-                style: 'background-image: url(https://www.toptal.com/designers/subtlepatterns/uploads/full-bloom.png);'
-            }
+            title: this.title
         }
     },
     data() {
         return {
-            title: 'Lowongan Kerja',
-            tokenRaw: '',
-            lokers: [],
+            title: 'Lowongan Kerja Detil',
+            loker: null,
         }
     },
     methods: {
-        async getLoker() {
+        async getLokerDetil() {
+            console.log(this.$route.params.id)
             try {
-                axios.get('/api/loker',
-                    {
-                        headers: {
-                            'Authorization': this.$auth.strategy.token.get()
-                        }
-                    }
-                ).then(({ data }) => {
-                    console.log(data.data)
-                    this.lokers.push(...data.data)
+                this.$axios.get('/api/loker/detil/')
+                .then(({ data }) => {
+                    // console.log(data.data)
+                    // this.lokers.push(...data.data)
                 }).catch((error) => {
                     // if (error.response) {
                     //     this.$notify({
@@ -77,7 +64,7 @@ export default {
         }
     },
     mounted() {
-        this.getLoker();
+        this.getLokerDetil();
     }
 }
 </script>

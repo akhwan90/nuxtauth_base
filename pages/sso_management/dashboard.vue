@@ -29,24 +29,21 @@
 import SidebarMenuSSOManagement from "@/components/SidebarMenuSSOManagement";
 export default {
     middleware: 'auth',
+    layout: 'user_layout',
     components: {
         SidebarMenuSSOManagement
     },
     head() {
         return {
-            title: this.title,
-            bodyAttrs: {
-                style: 'background-image: url(https://www.toptal.com/designers/subtlepatterns/uploads/full-bloom.png);'
-            }
+            title: this.title
         }
     },
     data() {
         return {
-            title: '',
+            title: 'SSO Management',
         }
     },
     mounted() {
-        this.title = 'SSO Management';
     }
 }
 </script>
