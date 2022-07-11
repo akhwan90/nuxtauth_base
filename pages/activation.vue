@@ -9,8 +9,6 @@
 			</div>
 			<div class="col-md-10 mx-auto col-lg-5">
 				<form @submit.prevent="userResetPassword">
-					<input type="hidden" v-model="reset.email">
-					<input type="hidden" v-model="reset.no_hp">
 					<div class="form-floating mb-3">
 						<label for="floatingInput">Masukkan kode yang dikirimkan</label>
 						<input type="text" class="form-control" id="floatingInput" v-model="reset.verification_code">
@@ -40,8 +38,6 @@ export default {
 			title: 'Masukkan kode registrasi akun JendelaKu',
 			reset: {
 				verification_code: '',
-				email: '',
-				no_hp: '',
 			}
 		}
 	},
@@ -54,17 +50,12 @@ export default {
 
 			this.$axios.post("api/activate", formData)
 				.then((response) => {
-					const uri_params = new URLSearchParams({
-						email: response.data.data.email,
-						code: response.data.data.code,
-					});
-
 					window.location.href = this.$config.baseURL + '/login';
-
 					console.log(response);
 				})
 				.catch((error) => {
 					this.$toast.error("Terjadi kesalahan..")
+					console.log(error);
 				});
 		}
 	}
