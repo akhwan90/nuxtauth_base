@@ -7,6 +7,9 @@
             <a :href="$config.baseURL + '/sso_management/menu'" class="list-group-item list-group-item-action">
                 <b-icon-table></b-icon-table> Menu Management
             </a>
+            <a :href="$config.baseURL + '/sso_management/approval_nik'" class="list-group-item list-group-item-action">
+                <b-icon-check-circle class="text-success"></b-icon-check-circle> Aproval NIK
+            </a>
         </div>
     </div>
 </template>

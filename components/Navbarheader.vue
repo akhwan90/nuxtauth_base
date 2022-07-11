@@ -51,7 +51,12 @@ export default {
         return {
             isAuth: this.$auth.loggedIn,
             name: this.$store.state.userDetil.name,
-            pp: this.$config.baseURL_API + '/api/user/profile_pict/' + this.$auth.user.id,
+            pp: null,
+        }
+    },
+    mounted() {
+        if (this.$auth.loggedIn) {
+            this.$config.baseURL_API + '/api/user/profile_pict/' + this.$auth.user.id
         }
     }
 }

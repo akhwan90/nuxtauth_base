@@ -1,7 +1,10 @@
 <template>
     <b-card-body>
         <b-card-title class="text-center">{{ userDetil.NAMA_LGKP }}</b-card-title>
-        <a :href="$config.baseURL + '/admin/user/change_pict'" class="btn btn-outline-warning w-100">
+        <a :href="$config.baseURL + '/admin/user/profile'" class="btn btn-outline-warning w-100">
+            <b-icon-people-fill></b-icon-people-fill> Profile User
+        </a>
+        <a :href="$config.baseURL + '/admin/user/change_pict'" class="btn btn-outline-warning w-100 mt-2">
             <b-icon-image></b-icon-image> Ubah Foto Profile
         </a>
         <a :href="$config.baseURL + '/admin/user/edit_profile'" class="btn btn-outline-primary w-100 mt-2">
