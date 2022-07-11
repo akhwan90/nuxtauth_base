@@ -3,7 +3,7 @@ module.exports = {
 	** Headers of the page
 	*/
 	server: {
-		port: '3005',
+		port: '3000',
 		host: 'localhost'
 	},
 	head: {
@@ -23,8 +23,9 @@ module.exports = {
 	},
 	axios: {
 		baseURL: process.env.NUXT_ENV_BASE_URL_API, // Used as fallback if no runtime config is provided
-		proxy: true,
+		// proxy: true,
 	},
+	/*
 	proxy: {
 		'/api': { target: process.env.NUXT_ENV_BASE_URL_API + '/api', pathRewrite: { '^/api/': '/' } }
 	},
@@ -174,7 +175,7 @@ module.exports = {
 		baseURL_API: process.env.NUXT_ENV_BASE_URL_API,
 	},
 	router: {
-		base: process.env.BASE_URL_APP
+		base: '/sso_new/'
 	}
 }
 
