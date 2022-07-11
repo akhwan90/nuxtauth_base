@@ -15,7 +15,8 @@
                     <div class="form-floating mb-3">
                         <label for="floatingPassword">Password</label>
                         <input type="password" class="form-control" id="floatingPassword" v-model="login.password">
-                        <small><a href="/forgot_password" class="text-danger float-right">Lupa password..?</a></small>
+                        <small><a :href="$config.baseURL + '/forgot_password'" class="text-danger float-right">Lupa
+                                password..?</a></small>
                     </div>
 
                     <button class="w-100 btn btn-lg btn-success mt-4" type="submit">
@@ -27,7 +28,7 @@
                     <button class="w-100 btn btn-lg btn-danger mt-2" type="button" @click="registerSocial('google')">
                         <b-icon-google></b-icon-google> Login dengan Google
                     </button>
-                    <a class="w-100 btn btn-lg btn-primary mt-2" href="/">
+                    <a class="w-100 btn btn-lg btn-primary mt-2" :href="$config.baseURL">
                         <b-icon-chevron-left></b-icon-chevron-left> Kembali Ke Beranda
                     </a>
 
@@ -40,15 +41,11 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
-
 export default {
+    layout: 'user_layout',
     head() {
         return {
-            title: this.title,
-            bodyAttrs: {
-                style: 'background-image: url(https://www.toptal.com/designers/subtlepatterns/uploads/full-bloom.png);'
-            }
+            title: this.title
         }
     },
     data() {
@@ -70,10 +67,10 @@ export default {
                 data: formData 
             }).then(() => {
                 this.$store.commit('SET_IS_AUTH', true)
-                window.location.href = '/';
+                window.location.href = this.$config.baseURL;
             })
             .catch((error) => {
-                alert("Terjadi kesalahan..")
+                this.$toast.error("Terjadi kesalahan..")
             });
         },
         async registerSocial(provider) {

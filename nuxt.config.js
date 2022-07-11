@@ -69,6 +69,7 @@ module.exports = {
 			'BIconPatchMinus',
 			'BIconPencil',
 			'BIconCheck',
+			'BIconChevronLeft',
 			'BIconSearch',
 			'BIconChat',
 			'BIconEnvelope',
@@ -97,6 +98,9 @@ module.exports = {
 			'BIconArrowLeft',
 			'BIconCheckCircle',
 			'BIconBank',
+			'BIconFacebook',
+			'BIconGoogle',
+			'BIconPersonCircle',
 
 			'BPagination',
 			'BFormInput',

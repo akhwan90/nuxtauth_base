@@ -26,12 +26,10 @@
 
 <script>
 export default {
+    layout: 'user_layout',
     head() {
         return {
-            title: this.title,
-            bodyAttrs: {
-                style: 'background-image: url(https://www.toptal.com/designers/subtlepatterns/uploads/full-bloom.png);'
-            }
+            title: this.title
         }
     },
     data() {
@@ -49,7 +47,7 @@ export default {
             let code = this.$route.query.code;
 
             if (!email || !code) {
-                this.$router.push('/')
+                window.location.href = this.$config.baseURL;
             }
         },
         userResetPasswordOK() {
@@ -62,11 +60,11 @@ export default {
             this.$axios.post("api/reset_password_ok", formData)
                 .then((response) => {
                     if (response.status == 200) {
-                        this.$router.push('/login')
+                        window.location.href = this.$config.baseURL + '/login';
                     }
                 })
                 .catch((error) => {
-                    alert("Terjadi kesalahan..")
+                    this.$toast.error("Terjadi kesalahan..")
                 });
         }
     },

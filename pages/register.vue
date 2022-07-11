@@ -37,10 +37,8 @@
                     </div>
 
                     <button class="w-100 btn btn-lg btn-success mt-2" type="submit">
-                        <b-icon-pencil-fill></b-icon-pencil-fill> Daftar
+                        <b-icon-check-circle></b-icon-check-circle> Daftar
                     </button>
-                    <!-- <hr class="my-4">
-                    <small class="text-muted">Masukkan username dan password yang benar</small> -->
                 </form>
 
                 <button class="w-100 btn btn-lg btn-primary mt-2" type="button" @click="registerSocial('facebook')">
@@ -49,7 +47,7 @@
                 <button class="w-100 btn btn-lg btn-danger mt-2" type="button" @click="registerSocial('google')">
                     <b-icon-google></b-icon-google> Daftar dengan Google
                 </button>
-                <a class="w-100 btn btn-lg btn-primary mt-2" href="/">
+                <a class="w-100 btn btn-lg btn-primary mt-2" :href="$config.baseURL">
                     <b-icon-chevron-left></b-icon-chevron-left> Kembali Ke Beranda
                 </a>
             </div>
@@ -58,15 +56,11 @@
 </template>
 
 <script>
-import axios from 'axios'
-
 export default {
+    layout: 'user_layout',
     head() {
         return {
-            title: this.title,
-            bodyAttrs: {
-                style: 'background-image: url(https://www.toptal.com/designers/subtlepatterns/uploads/full-bloom.png);'
-            }
+            title: this.title
         }
     },
     data() {
@@ -99,21 +93,22 @@ export default {
                         no_hp: this.register.no_hp
                     });
                     // console.log(response);
-                    this.$router.push('/activation?'+uri_params.toString())
+                    window.location.href = this.$config.baseURL + '/activation?'+uri_params.toString();
                 }
             })
             .catch((error) => {
                 // this.notifmsg = error.response.data.error
-                console.log(error)
+                // console.log(error)
+                this.$toast.error('Terjadi kesalahan..')
             });
         },
         async registerSocial(provider) {
             this.$toast.success('Contacting provider ...');
-            this.popupSocialLogin(`${process.env.BASE_URL_API}/api/login/${provider}/redirect`, '_blank');
+            this.popupSocialLogin(`${process.env.NUXT_ENV_BASE_URL_API}/api/login/${provider}/redirect`, '_blank');
         },
         popupSocialLogin(url, newWindow) {
-            let w = 300;
-            let h = 100;
+            let w = 700;
+            let h = 500;
             let left = (screen.width / 2) - (w / 2);
             let top = (screen.height / 2) - (h / 2);
 

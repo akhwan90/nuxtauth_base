@@ -22,15 +22,11 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
-
 export default {
+    layout: 'user_layout',
     head() {
         return {
-            title: this.title,
-            bodyAttrs: {
-                style: 'background-image: url(https://www.toptal.com/designers/subtlepatterns/uploads/full-bloom.png);'
-            }
+            title: this.title
         }
     },
     data() {
@@ -49,18 +45,17 @@ export default {
             this.$axios.post("api/reset_password", formData)
                 .then((response) => {
                     if (response.status == 200) {
-                        alert('Email / nomor HP ditemukan. Silakan cek inbox email / SMS anda, untuk melihat kode lupa password')
+                        this.$toast.success('Email / nomor HP ditemukan. Silakan cek inbox email / SMS anda, untuk melihat kode lupa password')
                         const uri_params = new URLSearchParams({
                             email: response.data.data.email,
                         });
                         
-                        // console.log(response);
-                        this.$router.push('/forgot_password_code?' + uri_params.toString())
+                        window.location.href = this.$config.baseURL + '/forgot_password_code?' + uri_params.toString();
                     }
                 })
                 .catch((error) => {
                     // alert(error.response.data)
-                    alert(error.response.data.error)
+                    this.$toast.error(error.response.data.error)
                     // this.notifmsg = error.response.data.error
                     // console.log(error)
                 });

@@ -22,15 +22,11 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
-
 export default {
+    layout: 'user_layout',
     head() {
         return {
-            title: this.title,
-            bodyAttrs: {
-                style: 'background-image: url(https://www.toptal.com/designers/subtlepatterns/uploads/full-bloom.png);'
-            }
+            title: this.title
         }
     },
     data() {
@@ -57,11 +53,11 @@ export default {
                         });
                         
                         // console.log(response);
-                        this.$router.push('/forgot_password_form_reset?' + uri_params.toString())
+                        window.location.href = this.$config.baseURL + '/forgot_password_form_reset?' + uri_params.toString();
                     }
                 })
                 .catch((error) => {
-                    alert("Terjadi kesalahan..")
+                    this.$toast.error("Terjadi kesalahan..")
                 });
         }
     }
